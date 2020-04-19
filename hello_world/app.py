@@ -5,15 +5,14 @@ import datetime
 import pymysql
 import pymysql.cursors
 import cryptography
-import api_config
 
-# configuration setup
-api_context_path = api_config.api_context_path
-db_server_host = api_config.db_server_host
-db_port = api_config.db_port
-db_name = api_config.db_name
-db_user_name = api_config.db_user_name
-db_user_password = api_config.db_user_password
+# default configuration setup
+api_context_path = os.getenv('API_CONTEXT_PATH') or '/hello/'
+db_server_host = os.getenv('DB_SERVER_HOST') or 'docker.for.mac.localhost'
+db_port = os.getenv('DB_PORT') or 3306
+db_name = os.getenv('DB_NAME') or 'sam'
+db_user_name = os.getenv('DB_USERNAME') or 'sam'
+db_user_password = os.getenv('DB_PASSWORD') or 'sam'
 
 # setup logger
 logger = logging.getLogger()
@@ -207,7 +206,7 @@ def get_record(username):
                 retrieved_dateofbirth = cursor_result[0]
                 date_of_birth_obj = datetime.datetime.strptime(retrieved_dateofbirth, '%Y-%m-%d')
                 current_date_obj = datetime.datetime.now()
-                if date_of_birth_obj.date() == current_date_obj.date():
+                if date_of_birth_obj.day == current_date_obj.day and date_of_birth_obj.month == current_date_obj.month:
                     get_request_response_message = "Hello, {0}! Happy Birthday!".format(username)
                 elif date_of_birth_obj.date() < current_date_obj.date():
                     # construct upcoming birthday date

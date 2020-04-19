@@ -1,5 +1,5 @@
 {
-  "body": "{\"dateOfBirth\": \"1980-07-06\"}",
+  "body": "{\"dateOfBirth\": \"1980-12-31\"}",
   "path": "/hello/username",
   "httpMethod": "PUT",
   "isBase64Encoded": false

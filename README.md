@@ -20,7 +20,10 @@
 - api_bad_event6.json (PUT request with invalid json format body data)
 - api_bad_event7.json (PUT request with invalid date format body data)
 - api_bad_event8.json (PUT request with future date, date from year 2222)
-- api_good_event1.json
+- api_good_event1.json (PUT request with valid date 31st december)
+- api_good_event2.json (GET request with username 'username')
+- api_good_event3.json (PUT request with valid date 1st january)
+- api_good_event4.json (PUT request with no date but to be customized in automated test)
 
 5. start local dev db : (in a separate terminal)
 - docker-compose up
@@ -33,3 +36,18 @@
 Note on Dockerfile used to build python 3.7 image.
 Can leverage to download python packages as necessary.
 https://github.com/lambci/docker-lambda/blob/master/python3.7/build/Dockerfile
+
+8. depending on breaking changes across versions of application, there's 2 ways to be used for deployment of lambda as mentioned below. For this test app, Linear10PercentEvery1Minute traffic shifting is used.
+https://github.com/awslabs/serverless-application-model/blob/master/docs/safe_lambda_deployments.rst
+
+9. RDS setup using parameters from cloudformation template, inside SAM template.yaml
+https://s3-us-west-2.amazonaws.com/cloudformation-templates-us-west-2/Drupal_Single_Instance_With_RDS.template
+
+10. to run unit tests with pytest
+- pip install pymysql cryptography pytest-docker
+- DB_SERVER_HOST="127.0.0.1" python -m pytest tests/ -v
+or
+- pip3 install pymysql cryptography pytest-docker --user (on mac with python3 installed)
+- DB_SERVER_HOST="127.0.0.1" python3 -m pytest tests/ -v
+
+11. db configuration can be externalized as api_config.py.

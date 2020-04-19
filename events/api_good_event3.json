@@ -1,0 +1,6 @@
+{
+  "body": "{\"dateOfBirth\": \"1980-01-06\"}",
+  "path": "/hello/username",
+  "httpMethod": "PUT",
+  "isBase64Encoded": false
+}

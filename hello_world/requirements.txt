@@ -1,0 +1,6 @@
+requests
+os
+logging
+dateime
+pymysql
+cryptography

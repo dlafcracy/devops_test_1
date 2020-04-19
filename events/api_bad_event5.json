@@ -1,0 +1,5 @@
+{
+  "path": "/hello/username",
+  "httpMethod": "PUT",
+  "isBase64Encoded": false
+}

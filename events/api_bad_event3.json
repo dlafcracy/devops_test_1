@@ -1,0 +1,5 @@
+{
+  "body": "{\"dateOfBirth\": \"1980-07-06\"}",
+  "path": "/hello/username",
+  "isBase64Encoded": false
+}

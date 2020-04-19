@@ -17,29 +17,48 @@ Resources:
       CodeUri: hello_world/
       Handler: app.lambda_handler
       Runtime: python3.7
+      Environment:
+        Variables:
+          DB_SERVER_HOST: aws-rds-cluster-endpoint
       Events:
-        HelloWorld:
+        HelloWorldGET:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /hello
             Method: get
-        HelloWorld:
+        HelloWorldPUT:
           Type: Api
           Properties:
             Path: /hello
+            Method: put
+        HelloWorldGET2:
+          Type: Api
+          Properties:
+            Path: /hello/{proxy+}
+            Method: get
+        HelloWorldPUT2:
+          Type: Api
+          Properties:
+            Path: /hello/{proxy+}
             Method: put
       AutoPublishAlias: live
       DeploymentPreference:
        Type: Linear10PercentEvery1Minute
   HelloWorldRDS:
-      Type: AWS::RDS::DBInstance
+      Type: 'AWS::RDS::DBCluster'
       Properties:
-        AllocatedStorage: 5
-        DBInstanceClass: db.t2.micro
-        Engine: MySQL
-        DBName: sam
+        DBClusterIdentifier: rds-sam-cluster
+        Engine: aurora
+        EngineVersion: 5.6.10a
+        EngineMode: serverless
         MasterUsername: sam
-        MasterUserPassword: sam
+        MasterUserPassword: sampassword1
+        DatabaseName: sam
+        ScalingConfiguration:
+          AutoPause: true
+          MinCapacity: 1
+          MaxCapacity: 1
+          SecondsUntilAutoPause: 300
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

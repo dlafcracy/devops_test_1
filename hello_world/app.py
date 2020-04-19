@@ -12,7 +12,7 @@ db_server_host = os.getenv('DB_SERVER_HOST') or 'docker.for.mac.localhost'
 db_port = os.getenv('DB_PORT') or 3306
 db_name = os.getenv('DB_NAME') or 'sam'
 db_user_name = os.getenv('DB_USERNAME') or 'sam'
-db_user_password = os.getenv('DB_PASSWORD') or 'sam'
+db_user_password = os.getenv('DB_PASSWORD') or 'sampassword1'
 
 # setup logger
 logger = logging.getLogger()
@@ -257,7 +257,6 @@ def lambda_handler(event, context):
 
     # make sure can connect to DB
     if not check_database_connection():
-        connection.close()
         return {
             "statusCode": 500,
             "body": json.dumps({

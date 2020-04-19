@@ -51,3 +51,8 @@ or
 - DB_SERVER_HOST="127.0.0.1" python3 -m pytest tests/ -v
 
 11. db configuration can be externalized as api_config.py.
+
+12. to deploy to AWS (this will include auto detect changeset required)
+- sam build --use-container
+- sam deploy --guided
+- note* : after cloudformation stack deployed and updated, need to go to AWS lambda console to add env var "DB_SERVER_HOST" for lambda function to be able to connect to RDS.

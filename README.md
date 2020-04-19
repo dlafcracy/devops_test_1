@@ -61,3 +61,4 @@ or
   - RDS actual database endpoint will only appear after Cloudformation stack deployment is complete .
   - After that, need to go to AWS lambda console to change environment variable "DB_SERVER_HOST" for lambda function to allow connection to RDS.
   - This works on the assumption there is not VPC setup yet. Otherwise more configuration is needed in template.yml to include setup for VPC, subnets, Security group, Network ACL, Routing Table, VPC Endpoint for AWS Lambda, AWS Route53, AWS WAF enabling at API Gateway.
+  - Custom domain name can be used here to alias to any specific url on API gateway. https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-custom-domain-names.html

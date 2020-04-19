@@ -53,6 +53,11 @@ or
 11. db configuration can be externalized as api_config.py.
 
 12. to deploy to AWS (this will include auto detect changeset required)
+- aws configure (run one time to setup AWS cli credentials)
 - sam build --use-container
 - sam deploy --guided
-- note* : after cloudformation stack deployed and updated, need to go to AWS lambda console to add env var "DB_SERVER_HOST" for lambda function to be able to connect to RDS.
+- note* :
+  - This sam template covers setup of Lambda function, API gateway and RDS Aurora DB initialization.
+  - RDS actual database endpoint will only appear after Cloudformation stack deployment is complete .
+  - After that, need to go to AWS lambda console to change environment variable "DB_SERVER_HOST" for lambda function to allow connection to RDS.
+  - This works on the assumption there is not VPC setup yet. Otherwise more configuration is needed in template.yml to include setup for VPC, subnets, Security group, Network ACL, Routing Table, VPC Endpoint for AWS Lambda, AWS Route53, AWS WAF enabling at API Gateway.

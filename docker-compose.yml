@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   database:
-    image: 'mysql:latest'
+    image: 'mysql:5'
     container_name: dev.api.db
     environment:
       MYSQL_ROOT_PASSWORD: sam
